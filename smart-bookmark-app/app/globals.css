@@ -1,54 +1,412 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --matrix-green: #00ff41;
+  --matrix-dark: #001a00;
+  --emerald-glow: #10b981;
+  --cyber-green: #39ff14;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  background: #000000;
+  color: #ffffff;
+  overflow-x: hidden;
 }
 
-/* Blob animation for background effects */
-@keyframes blob {
+/* Matrix Rain Animation */
+@keyframes matrix-rain {
   0% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translateY(-100%);
+    opacity: 0;
   }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
+
+  10% {
+    opacity: 1;
   }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
+
+  90% {
+    opacity: 1;
   }
+
   100% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translateY(100vh);
+    opacity: 0;
   }
 }
 
-.animate-blob {
-  animation: blob 7s infinite;
+.matrix-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
 }
 
-.animation-delay-2000 {
-  animation-delay: 2s;
+.matrix-column {
+  position: absolute;
+  top: -100%;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: var(--matrix-green);
+  text-shadow: 0 0 8px var(--matrix-green);
+  animation: matrix-rain linear infinite;
+  opacity: 0.3;
 }
 
-.animation-delay-4000 {
-  animation-delay: 4s;
+/* Glow Effects */
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes neon-glow {
+
+  0%,
+  100% {
+    text-shadow:
+      0 0 10px var(--matrix-green),
+      0 0 20px var(--matrix-green),
+      0 0 30px var(--matrix-green);
+  }
+
+  50% {
+    text-shadow:
+      0 0 15px var(--matrix-green),
+      0 0 30px var(--matrix-green),
+      0 0 45px var(--matrix-green),
+      0 0 60px var(--emerald-glow);
+  }
+}
+
+@keyframes box-glow {
+
+  0%,
+  100% {
+    box-shadow:
+      0 0 20px rgba(0, 255, 65, 0.3),
+      0 0 40px rgba(0, 255, 65, 0.1),
+      inset 0 0 20px rgba(0, 255, 65, 0.05);
+  }
+
+  50% {
+    box-shadow:
+      0 0 30px rgba(0, 255, 65, 0.5),
+      0 0 60px rgba(0, 255, 65, 0.2),
+      inset 0 0 30px rgba(0, 255, 65, 0.1);
+  }
+}
+
+/* Particle Background */
+@keyframes float-particle {
+
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.4;
+  }
+
+  25% {
+    transform: translate(10px, -10px) rotate(90deg);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translate(-10px, -20px) rotate(180deg);
+    opacity: 0.8;
+  }
+
+  75% {
+    transform: translate(-20px, -10px) rotate(270deg);
+    opacity: 0.6;
+  }
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--matrix-green);
+  border-radius: 50%;
+  animation: float-particle 8s ease-in-out infinite;
+  box-shadow: 0 0 10px var(--matrix-green);
+}
+
+/* Cyber Grid */
+@keyframes grid-pulse {
+
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.cyber-grid {
+  background-image:
+    linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-pulse 4s ease-in-out infinite;
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: rgba(0, 26, 0, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  box-shadow:
+    0 8px 32px rgba(0, 255, 65, 0.1),
+    inset 0 0 20px rgba(0, 255, 65, 0.05);
+}
+
+.glass-panel:hover {
+  background: rgba(0, 40, 0, 0.5);
+  border-color: rgba(0, 255, 65, 0.4);
+  box-shadow:
+    0 12px 48px rgba(0, 255, 65, 0.2),
+    inset 0 0 30px rgba(0, 255, 65, 0.1);
+}
+
+/* Smooth Transitions */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-slide-left {
+  animation: slide-in-left 0.6s ease-out forwards;
+}
+
+.animate-slide-right {
+  animation: slide-in-right 0.6s ease-out forwards;
+}
+
+.animate-scale {
+  animation: scale-in 0.4s ease-out forwards;
+}
+
+/* Cyber Button */
+.cyber-button {
+  position: relative;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.3));
+  border: 2px solid var(--emerald-glow);
+  color: var(--matrix-green);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.cyber-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.4), transparent);
+  transition: left 0.5s ease;
+}
+
+.cyber-button:hover::before {
+  left: 100%;
+}
+
+.cyber-button:hover {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.4), rgba(5, 150, 105, 0.5));
+  border-color: var(--cyber-green);
+  box-shadow:
+    0 0 20px rgba(0, 255, 65, 0.5),
+    0 0 40px rgba(0, 255, 65, 0.3),
+    inset 0 0 20px rgba(0, 255, 65, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+  border-left: 1px solid rgba(0, 255, 65, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--emerald-glow), var(--matrix-green));
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--cyber-green), var(--emerald-glow));
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.8);
+}
+
+/* Loading Spinner */
+@keyframes spin-glow {
+  0% {
+    transform: rotate(0deg);
+    box-shadow: 0 0 10px var(--matrix-green);
+  }
+
+  100% {
+    transform: rotate(360deg);
+    box-shadow: 0 0 20px var(--emerald-glow);
+  }
+}
+
+.spinner {
+  border: 3px solid rgba(0, 255, 65, 0.1);
+  border-top-color: var(--matrix-green);
+  border-radius: 50%;
+  animation: spin-glow 1s linear infinite;
+}
+
+/* Stagger Animation Delays */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+/* Text Effects */
+.text-matrix-glow {
+  color: var(--matrix-green);
+  text-shadow:
+    0 0 10px var(--matrix-green),
+    0 0 20px var(--matrix-green),
+    0 0 30px var(--emerald-glow);
+  animation: neon-glow 2s ease-in-out infinite;
+}
+
+.text-cyber {
+  background: linear-gradient(135deg, var(--emerald-glow), var(--cyber-green), var(--matrix-green));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}
+
+/* Card Hover Effect */
+@keyframes card-3d {
+  0% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  }
+}
+
+.card-3d-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-3d-hover:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-10px);
+  box-shadow:
+    0 20px 60px rgba(0, 255, 65, 0.3),
+    0 0 30px rgba(0, 255, 65, 0.2),
+    inset 0 0 30px rgba(0, 255, 65, 0.1);
+}
+
+/* Pulse Border */
+@keyframes pulse-border {
+
+  0%,
+  100% {
+    border-color: rgba(0, 255, 65, 0.3);
+  }
+
+  50% {
+    border-color: rgba(0, 255, 65, 0.8);
+  }
+}
+
+.pulse-border {
+  animation: pulse-border 2s ease-in-out infinite;
 }
