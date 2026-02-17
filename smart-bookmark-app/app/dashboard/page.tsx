@@ -240,7 +240,7 @@ export default function DashboardPage() {
                                     </div>
                                     <div>
                                         <p className="text-sm font-bold text-white">{user.user_metadata?.name}</p>
-                                        <p className="text-xs text-purple-300/70">Pro Member</p>
+                                        <p className="text-xs text-purple-300/70">Member</p>
                                     </div>
                                 </div>
                             )}
