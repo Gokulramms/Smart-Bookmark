@@ -1,0 +1,47 @@
+{
+  "name": "smart-bookmark-app",
+  "version": "1.0.0",
+  "description": "AI-powered bookmark manager with real-time sync",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "@supabase/ssr": "^0.7.1",
+    "@supabase/supabase-js": "^2.48.0",
+    "clsx": "^2.1.1",
+    "dompurify": "^3.2.2",
+    "next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.5.5",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/dompurify": "^3.2.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "^15.1.6",
+    "postcss": "^8",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5"
+  },
+  "keywords": [
+    "bookmark",
+    "ai",
+    "nextjs",
+    "supabase",
+    "realtime",
+    "gemini"
+  ],
+  "author": "",
+  "license": "MIT"
+}
